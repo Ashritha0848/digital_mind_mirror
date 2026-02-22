@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2>📊 Emotional Dashboard</h2>
+
+    <canvas id="sentimentChart"></canvas>
+
+    <script>
+        const data = {{ data|tojson }};
+        const sentiments = data.map(item => item[1]);
+        const dates = data.map(item => item[4]);
+
+        new Chart(document.getElementById('sentimentChart'), {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: 'Sentiment Score',
+                    data: sentiments,
+                    borderWidth: 2
+                }]
+            }
+        });
+    </script>
+
+    <a href="/">Back</a>
+</body>
+</html>
